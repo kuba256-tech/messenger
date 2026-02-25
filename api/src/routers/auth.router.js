@@ -8,7 +8,7 @@ authRouter.post("/signup", signup);
 authRouter.post("/signin", signin);
 authRouter.post("/logout", logout);
 
-authRouter.post("update-profile", protectRoute, updateProfile)
+authRouter.post("/update-profile", protectRoute, updateProfile)
 authRouter.get("/check", protectRoute, checkAuth)
 
 export default authRouter;
