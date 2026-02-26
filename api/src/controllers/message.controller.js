@@ -1,13 +1,15 @@
 import cloudinary from "../lib/cloudinary.js";
 import Message from "../models/message.model.js";
+import User from "../models/user.model.js";
 
 export const getUserForSideBar = async (req, res) => {
   try {
-    const { id: loggedInUserId } = req.user._id;
-    const filteredUser = await user
-      .find({ _id: { $ne: loggedInUserId } })
-      .select("-password");
-    res.status(200).json(filteredUser );
+    const { _id: loggedInUserId } = req.user;
+
+    const filteredUser = await User.find({
+      _id: { $ne: loggedInUserId },
+    }).select("-password");
+    res.status(200).json(filteredUser);
   } catch (error) {
     console.log("Error in getUserForSideBar", error.message);
     res.status(500).json({ message: "internal Server Error" });
@@ -42,11 +44,16 @@ export const sendMessage = async (req, res) => {
       const uploadResponse = await cloudinary.uploader.upload(image);
       imageUrl = uploadResponse.url;
     }
-    const newMessage = await Message({senderId,receiverId,  text, image:imageUrl });
+    const newMessage = await Message({
+      senderId,
+      receiverId,
+      text,
+      image: imageUrl,
+    });
     await newMessage.save();
-    res.status(200).json( newMessage );
+    res.status(200).json(newMessage);
   } catch (error) {
-    console.log(`Error occured in sendMessage controller:  ${error.message}`)
-    res.status(500).json({error:"Internal Server Error"})
+    console.log(`Error occured in sendMessage controller:  ${error.message}`);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };

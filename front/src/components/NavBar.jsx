@@ -8,9 +8,9 @@ const NavBar = () => {
     <header>
       <div className="navbar  shadow-sm border-b-3 ">
         <div className="flex-1">
-          <a className="btn btn-ghost  sacramento font-sacramento text-h2">
+          <Link to="/" className="btn btn-ghost  sacramento font-sacramento text-h2">
             Messenger
-          </a>
+          </Link>
         </div>
         <div className="flex-none hidden md:block">
           <Link to="/settings">
