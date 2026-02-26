@@ -13,7 +13,7 @@ const NavBar = () => {
           </a>
         </div>
         <div className="flex-none hidden md:block">
-          <Link to="/settins">
+          <Link to="/settings">
             <button className="btn bg-[#2F2F2F] text-white border-black">
               <Settings />
               Setting

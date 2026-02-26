@@ -74,11 +74,11 @@ const LoginPage = () => {
                 <div className="flex justify-between">
                   <label className="label">Password </label>
                   {showPassword ? (
-                    <button onClick={togglePassword}>
+                    <button type="button" onClick={togglePassword}>
                       <Eye />
                     </button>
                   ) : (
-                    <button onClick={togglePassword}>
+                    <button type="button" onClick={togglePassword}>
                       <EyeClosed />
                     </button>
                   )}

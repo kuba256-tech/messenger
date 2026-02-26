@@ -55,7 +55,7 @@ const ProfilePage = () => {
             <p className="text-emphasis">{authUser.email}</p>
         </div>
         <div className="w-[70%] lg:w-[30%]">
-            <h4 className="text-small text-slate-400 mb-1">Account information</h4>
+            <h4 className="text-small mb-1">Account information</h4>
             <div className="flex justify-between text-caption border-b border-dashed font-varela-round">
                 <p>member since</p>
                 <p className="">{dayjs(authUser.createdAt).format('MM-DD-YYYY')}</p>

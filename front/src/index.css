@@ -1,5 +1,7 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: all;
+}
 
 @import "./styles/fonts.css";
 @import "./styles/typography.css";
@@ -9,7 +11,7 @@ body {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   width: 100%;
-  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 input {
@@ -17,14 +19,11 @@ input {
   font-size: var(--fs-small);
   line-height: 1.6;
 }
-label{
-   font-family: "Poppins", sans-serif;
+label {
+  font-family: "Poppins", sans-serif;
   font-size: var(--fs-body);
   line-height: 1.6;
 }
-
-
-
 
 /* fonts-tips {
   --fs-body: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);       16 -> 18 
@@ -33,4 +32,3 @@ label{
   --fs-h2: clamp(1.5rem, 1.2rem + 1vw, 2rem);               24 -> 32 
   --fs-hero: clamp(2rem, 1.2rem + 3vw, 3.125rem);           32 -> 50 
 } */
-
