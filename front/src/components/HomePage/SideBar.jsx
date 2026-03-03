@@ -2,18 +2,18 @@ import React from "react";
 import { useChatStore } from "../../store/useChatStore";
 import { useEffect } from "react";
 import { Contact } from "lucide-react";
-import SideBarSkeletons from "./SideBarSkeletons";
 import noPic from "../../assets/noPic.jpg"
+import SideBarSkeleton from "../skeletons/SideBarSkeleton";
 
 const SideBar = () => {
-  const { getUsers, users, selectedUser, SetSelectedUser, isUserLoading } =
+  const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
     useChatStore();
 
   useEffect(() => {
     getUsers();
   }, [getUsers]);
-
-  console.log(users);
+  if(isUsersLoading)return <SideBarSkeleton/>
+  
   return (
     <aside className="col-span-3 border-r-2 p-4">
       <div className="flex gap-2 border-b pb-1">
@@ -21,12 +21,15 @@ const SideBar = () => {
         <p className="text-emphasis">Contacts</p>
       </div>
       <div>
-        <div className="py-3 space-y-3">
+        <div className="py-3 space-y-2">
           {users.map((user) => (
-            <div className="flex gap-2 items-center">
+            <div 
+            onClick={()=>setSelectedUser(user)}
+            key={user._id} className={`flex p-1 gap-2 items-center ${selectedUser && user._id === selectedUser._id && "bg-black/20"} transition-all ease-in-out rounded-2xl cursor-pointer`} onClick={()=>setSelectedUser(user)}>
               <div className="w-15 relative">
                 <img
-                  className="z-2 w-15 h-15  rounded-full "
+                  className="z-2 w-15 h-15  rounded-full"
+                  alt="userImage"
                   src={user.profilePic? user.profilePic : noPic}
                 />
                 <div className="bg-green-600  absolute z-1 right-1 bottom-1 w-2 h-2 rounded-full"></div>

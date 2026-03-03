@@ -42,7 +42,7 @@ export const sendMessage = async (req, res) => {
     let imageUrl;
     if (image) {
       const uploadResponse = await cloudinary.uploader.upload(image);
-      imageUrl = uploadResponse.url;
+      imageUrl = uploadResponse.secure_url;
     }
     const newMessage = await Message({
       senderId,
@@ -51,6 +51,7 @@ export const sendMessage = async (req, res) => {
       image: imageUrl,
     });
     await newMessage.save();
+
     res.status(200).json(newMessage);
   } catch (error) {
     console.log(`Error occured in sendMessage controller:  ${error.message}`);

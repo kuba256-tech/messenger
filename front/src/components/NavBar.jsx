@@ -6,7 +6,7 @@ const NavBar = () => {
   const { logout, authUser } = useAuthStore();
   return (
     <header>
-      <div className="navbar  shadow-sm border-b-3 ">
+      <div className="navbar  shadow-sm border-b-3  bg-primay">
         <div className="flex-1">
           <Link to="/" className="btn btn-ghost  sacramento font-sacramento text-h2">
             Messenger
