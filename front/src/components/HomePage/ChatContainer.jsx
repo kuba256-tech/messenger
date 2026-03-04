@@ -1,27 +1,43 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAuthStore } from "../../store/useAuthStore";
 import { useChatStore } from "../../store/useChatStore";
 import ChatInputMessage from "./ChatInputMessage";
 import ChatTop from "./ChatTop";
 import noPic from "../../assets/noPic.jpg";
 const ChatContainer = () => {
-  const { messages, selectedUser, getMessages } = useChatStore();
+  const {
+    messages,
+    selectedUser,
+    getMessages,
+    subscribeToMessages,
+    unsubscribeFromMessages,
+  } = useChatStore();
   const { authUser } = useAuthStore();
+
+  const messageEndRef = useRef(null)
 
   useEffect(() => {
     getMessages(selectedUser._id);
-  }, [getMessages, selectedUser]);
+    subscribeToMessages();
+    return () => unsubscribeFromMessages();
+  }, [getMessages, selectedUser, subscribeToMessages, unsubscribeFromMessages]);
+
+  useEffect(()=>{
+    if(messageEndRef.current && messages)
+    messageEndRef.current.scrollIntoView({behavior:"smooth"})
+  },[messages])
 
   return (
-    <div className="col-span-9 p-4 h-full flex flex-col">
+    <div className="col-span-9 p-4 h-full flex flex-col min-h-0">
       <ChatTop />
-      <div className="h-full">
+      <div className="flex-1 min-h-0 overflow-y-auto">
         {messages.map((message) => (
-          <div key={message._id}>
+          <div 
+          ref={messageEndRef}
+          key={message._id}>
             <div
-              className={`chat ${message.senderId === authUser._id ?  "chat-end": "chat-start"}`}
+              className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
             >
-             
               <div className="chat-image avatar">
                 <div className="w-10 rounded-full">
                   <img
@@ -38,21 +54,19 @@ const ChatContainer = () => {
                 <time className="text-xs opacity-50">12:45</time>
               </div>
               <div className="chat-bubble">
-                 {message.image && (
-                <img
-                  src={message.image}
-                  alt="Attachment"
-                  className="sm:max-w-[100px] rounded-md mb-2"
-                />
-              )}
-                
+                {message.image && (
+                  <img
+                    src={message.image}
+                    alt="Attachment"
+                    className="sm:max-w-[100px] rounded-md mb-2"
+                  />
+                )}
+
                 {message.text && message.text}
-                </div>
+              </div>
 
               <div className="chat-footer opacity-50">Delivered</div>
-
             </div>
-          
           </div>
         ))}
       </div>

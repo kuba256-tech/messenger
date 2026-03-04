@@ -72,6 +72,7 @@ const ChatInputMessage = () => {
           <div className="px-4 py-1 flex-1 border rounded-xl">
             <label htmlFor="messageText">
               <input
+              value={text}
                 className="w-full outline-0 b-0"
                 type="text"
                 id="messageText"

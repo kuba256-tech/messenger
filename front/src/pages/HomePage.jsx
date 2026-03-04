@@ -10,8 +10,8 @@ const HomePage = () => {
     const {selectedUser} = useChatStore()
 
   return (
-    <div className="flex justify-center min-h-[calc(100vh-4rem)]">
-      <div className="w-[70%] my-12 grid grid-cols-12 rounded-2xl bg-black/50">
+    <div className="h-[calc(100vh-4rem)] overflow-hidden flex justify-center p-4">
+      <div className="w-[70%] h-full grid grid-cols-12 rounded-2xl bg-black/50 overflow-hidden">
         <SideBar />
         {selectedUser ?  <ChatContainer/>: <NoChatSelected/>}
       </div>

@@ -1,27 +1,38 @@
 import express from "express";
-import dotenv from "dotenv"
-import authRouter from "./routers/auth.router.js"
+import dotenv from "dotenv";
+import authRouter from "./routers/auth.router.js";
 import { connectDB } from "./lib/db.js";
-import cookieParser from "cookie-parser"
+import cookieParser from "cookie-parser";
 import messageRouter from "./routers/message.router.js";
-import cors from "cors"
+import cors from "cors";
+import { app, server } from "./lib/socket.js";
+import mongoose from "mongoose";
 
-
-dotenv.config()
-const app = express();
+dotenv.config();
 const PORT = process.env.PORT;
 
-app.use(cors({
-  origin:["http://localhost:5173", "http://localhost:5174"],
-  credentials:true
-}))
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:5174"],
+    credentials: true,
+  }),
+);
+
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 
-app.use("/api/auth",authRouter)
-app.use("/api/message", messageRouter)
+app.use("/api/auth", authRouter);
+app.use("/api/message", messageRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server is runnng on port ${PORT}`);
-  connectDB()
-});
+const run = async () => {
+  server.listen(PORT, () => {
+    console.log(`Server is runnng on port ${PORT}`);
+    connectDB();
+  });
+
+  process.on("exit", () => {
+    mongoose.disconnect();
+  });
+};
+
+run().catch((e)=>console.log(e))
