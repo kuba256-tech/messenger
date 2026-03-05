@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const generateToken = (userId, res) => {
@@ -14,3 +15,9 @@ export const generateToken = (userId, res) => {
 
   return token;
 };
+
+export const generatePassword = async(password)=>{
+  const salt = await bcrypt.genSalt(10)
+  const hash = await bcrypt.hash(password, salt)
+  return hash
+}

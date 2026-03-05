@@ -1,15 +1,11 @@
 import { MessagesSquare } from "lucide-react";
 
 const NoChatSelected = () => {
- 
-
   return (
-    <div className="col-span-9">
-      <div
-        className={`h-full flex items-center justify-center gap-2`}
-      >
+    <div className="h-full">
+      <div className="h-full flex items-center justify-center gap-2 px-4 text-center">
         <MessagesSquare className="animate-bounce" />
-        <h3 className="text-3h">No Messages Yet</h3>
+        <h3 className="text-h3">No Messages Yet</h3>
       </div>
     </div>
   );

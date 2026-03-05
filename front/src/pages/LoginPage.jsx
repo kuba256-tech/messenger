@@ -69,6 +69,7 @@ const LoginPage = () => {
                   className="input w-full"
                   placeholder="email"
                   name="email"
+                  value={formData.email}
                   onChange={handleOnChange}
                 />
                 <div className="flex justify-between">
@@ -88,6 +89,7 @@ const LoginPage = () => {
                   className="input w-full"
                   placeholder="password"
                   name="password"
+                  value={formData.password}
                   onChange={handleOnChange}
                 />
 

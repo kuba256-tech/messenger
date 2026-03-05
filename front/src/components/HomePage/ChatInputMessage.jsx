@@ -67,13 +67,13 @@ const ChatInputMessage = () => {
         </div>
       )}
 
-      <form onSubmit={handleSendMessage} className="relative">
-        <div className="flex items-center gap-3">
-          <div className="px-4 py-1 flex-1 border rounded-xl">
+      <form onSubmit={handleSendMessage} className="relative pt-2">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex-1 rounded-xl border px-3 py-1 sm:px-4">
             <label htmlFor="messageText">
               <input
-              value={text}
-                className="w-full outline-0 b-0"
+                value={text}
+                className="w-full border-0 bg-transparent outline-0"
                 type="text"
                 id="messageText"
                 placeholder="text"
@@ -91,14 +91,14 @@ const ChatInputMessage = () => {
             />
             <button
               onClick={() => selectImgRef.current.click()}
-              className="cursor-pointer"
+              className="btn btn-ghost btn-sm cursor-pointer px-2"
               type="button"
             >
-              <ImageUp />
+              <ImageUp className="size-5" />
             </button>
           </div>
-          <button type="submit" className="cursor-pointer">
-            <Send />
+          <button type="submit" className="btn btn-sm cursor-pointer px-2">
+            <Send className="size-4" />
           </button>
         </div>
       </form>

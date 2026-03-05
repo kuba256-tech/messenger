@@ -6,13 +6,16 @@ const NavBar = () => {
   const { logout, authUser } = useAuthStore();
   return (
     <header>
-      <div className="navbar  shadow-sm border-b-3  bg-primay">
+      <div className="navbar border-b border-base-300 bg-base-100/90 px-2 shadow-sm backdrop-blur sm:px-4">
         <div className="flex-1">
-          <Link to="/" className="btn btn-ghost  sacramento font-sacramento text-h2">
+          <Link
+            to="/"
+            className="btn btn-ghost sacramento px-2 font-sacramento text-h3 sm:text-h2"
+          >
             Messenger
           </Link>
         </div>
-        <div className="flex-none hidden md:block">
+        <div className="flex-none hidden items-center gap-2 md:flex">
           <Link to="/settings">
             <button className="btn bg-[#2F2F2F] text-white border-black">
               <Settings />
@@ -37,38 +40,38 @@ const NavBar = () => {
             </>
           )}
         </div>
-        
-        <div className="dropdown dropdown-center md:hidden ">
-          <div tabIndex={0} role="button" className="btn m-1 bg-transparent">
-            <Menu />
+
+        <div className="dropdown dropdown-end md:hidden">
+          <div tabIndex={0} role="button" className="btn btn-ghost btn-sm m-0">
+            <Menu className="size-5" />
           </div>
           <ul
             tabIndex="-1"
-            className="dropdown-content menu mr-[40%]  rounded-box z-1  bg-slate-800 "
+            className="menu dropdown-content z-10 mt-2 w-44 rounded-box bg-slate-800 p-2 shadow"
           >
-           <Link to="/settings">
-            <button className="btn w-full  text-white border-black bg-transparent">
-              <Settings />
-              Setting
-            </button>
-          </Link>
-          {authUser && (
-            <>
-              <Link to={"/profile"}>
-                <button className="btn w-full bg-[#2F2F2F] text-white border-black bg-transparent">
-                  <UserRoundPen />
-                  Profile
-                </button>
-              </Link>
-              <button
-                onClick={logout}
-                className="btn w-full bg-[#2F2F2F] text-white border-black bg-transparent"
-              >
-                <LogOut />
-                Logout
+            <Link to="/settings">
+              <button className="btn w-full border-black bg-transparent text-white">
+                <Settings />
+                Setting
               </button>
-            </>
-          )}
+            </Link>
+            {authUser && (
+              <>
+                <Link to={"/profile"}>
+                  <button className="btn w-full border-black bg-transparent text-white">
+                    <UserRoundPen />
+                    Profile
+                  </button>
+                </Link>
+                <button
+                  onClick={logout}
+                  className="btn w-full border-black bg-transparent text-white"
+                >
+                  <LogOut />
+                  Logout
+                </button>
+              </>
+            )}
           </ul>
         </div>
       </div>

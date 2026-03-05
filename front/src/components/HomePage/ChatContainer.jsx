@@ -14,7 +14,7 @@ const ChatContainer = () => {
   } = useChatStore();
   const { authUser } = useAuthStore();
 
-  const messageEndRef = useRef(null)
+  const messageEndRef = useRef(null);
 
   useEffect(() => {
     getMessages(selectedUser._id);
@@ -22,19 +22,17 @@ const ChatContainer = () => {
     return () => unsubscribeFromMessages();
   }, [getMessages, selectedUser, subscribeToMessages, unsubscribeFromMessages]);
 
-  useEffect(()=>{
-    if(messageEndRef.current && messages)
-    messageEndRef.current.scrollIntoView({behavior:"smooth"})
-  },[messages])
+  useEffect(() => {
+    if (messageEndRef.current && messages)
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
-    <div className="col-span-9 p-4 h-full flex flex-col min-h-0">
+    <div className="h-full flex flex-col min-h-0 p-2 sm:p-4">
       <ChatTop />
       <div className="flex-1 min-h-0 overflow-y-auto">
         {messages.map((message) => (
-          <div 
-          ref={messageEndRef}
-          key={message._id}>
+          <div ref={messageEndRef} key={message._id}>
             <div
               className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
             >
@@ -58,7 +56,7 @@ const ChatContainer = () => {
                   <img
                     src={message.image}
                     alt="Attachment"
-                    className="sm:max-w-[100px] rounded-md mb-2"
+                    className="mb-2 max-w-30 rounded-md sm:max-w-45"
                   />
                 )}
 
