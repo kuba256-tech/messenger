@@ -7,9 +7,11 @@ import messageRouter from "./routers/message.router.js";
 import cors from "cors";
 import { app, server } from "./lib/socket.js";
 import mongoose from "mongoose";
+import path from "path";
 
 dotenv.config();
 const PORT = process.env.PORT;
+const __dirname = path.resolve();
 
 app.use(
   cors({
@@ -24,6 +26,13 @@ app.use(cookieParser());
 app.use("/api/auth", authRouter);
 app.use("/api/message", messageRouter);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../front/dist")));
+  app.get(/.*/, (req, res) => {
+    res.sendFile(path.join(__dirname, "../front", "dist", "index.html"));
+  });
+}
+
 const run = async () => {
   server.listen(PORT, () => {
     console.log(`Server is runnng on port ${PORT}`);
@@ -35,4 +44,4 @@ const run = async () => {
   });
 };
 
-run().catch((e)=>console.log(e))
+run().catch((e) => console.log(e));

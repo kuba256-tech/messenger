@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: messengermern-api
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: npm install --prefix api && npm install --prefix front && npm run build --prefix front
+    startCommand: npm run start --prefix api
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
