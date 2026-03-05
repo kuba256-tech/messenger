@@ -25,32 +25,35 @@ const SideBar = () => {
       </div>
       <div>
         <div className="py-3 space-y-2">
-          {users.map((user) => (
-            <div
-              onClick={() => setSelectedUser(user)}
-              key={user._id}
-              className={`flex items-center gap-2 rounded-2xl p-2 transition-all ease-in-out ${selectedUser && user._id === selectedUser._id && "bg-black/20"} cursor-pointer`}
-            >
-              <div className="relative w-12 sm:w-14">
-                <img
-                  className="z-2 h-12 w-12 rounded-full sm:h-14 sm:w-14"
-                  alt="userImage"
-                  src={user.profilePic ? user.profilePic : noPic}
-                />
-                <div
-                  className={` ${onlineUsers.includes(user._id) ? "bg-green-600" : "bg-red-600"}  absolute z-1 right-1 bottom-1 w-2 h-2 rounded-full`}
-                ></div>
+          {users.map((user) => {
+            const isOnline = onlineUsers.some(
+              (id) => String(id) === String(user._id),
+            );
+
+            return (
+              <div
+                onClick={() => setSelectedUser(user)}
+                key={user._id}
+                className={`flex items-center gap-2 rounded-2xl p-2 transition-all ease-in-out ${selectedUser && user._id === selectedUser._id && "bg-black/20"} cursor-pointer`}
+              >
+                <div className="relative w-12 sm:w-14">
+                  <img
+                    className="z-2 h-12 w-12 rounded-full sm:h-14 sm:w-14"
+                    alt="userImage"
+                    src={user.profilePic ? user.profilePic : noPic}
+                  />
+                  <div
+                    className={` ${isOnline ? "bg-green-600" : "bg-red-600"} absolute z-1 right-1 bottom-1 w-2 h-2 rounded-full`}
+                  ></div>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-bold font-poppins ">
+                    {user.fullName}
+                  </p>
+                </div>
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-bold font-poppins ">
-                  {user.fullName}
-                </p>
-                <p className="truncate text-small opacity-80">
-                  last Message....
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </aside>
